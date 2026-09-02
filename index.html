@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Prevent "Cannot set property fetch of #<Window> which has only a getter" TypeError in modern browser runtimes
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          if (originalFetch) {
+            // Redefine on window
+            Object.defineProperty(window, 'fetch', {
+              value: originalFetch,
+              writable: true,
+              configurable: true,
+              enumerable: true
+            });
+            // Redefine on globalThis
+            if (typeof globalThis !== 'undefined') {
+              Object.defineProperty(globalThis, 'fetch', {
+                value: originalFetch,
+                writable: true,
+                configurable: true,
+                enumerable: true
+              });
+            }
+          }
+        } catch (e) {
+          console.warn("Failed to redefine window.fetch to be writable:", e);
+        }
+        
+        // Define global on window to prevent Node-targeted libraries from crashing in browser
+        try {
+          if (typeof window.global === 'undefined') {
+            window.global = window;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rural Health Ecosystem - Unified Digital Health Platform</title>
+    <meta name="description" content="A unified, multi-role digital health platform for rural communities connecting patients, doctors, lab technicians, pharmacies, and facility administrators with shared records, AI triage, teleconsultations, and referral tracking." />
+    <meta property="og:title" content="Rural Health Ecosystem - Unified Digital Health Platform" />
+    <meta property="og:description" content="A unified, multi-role digital health platform for rural communities connecting patients, doctors, lab technicians, pharmacies, and facility administrators with shared records, AI triage, teleconsultations, and referral tracking." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

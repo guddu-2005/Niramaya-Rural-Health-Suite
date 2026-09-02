@@ -1,0 +1,6 @@
+{
+  "name": "Rural Health Ecosystem",
+  "description": "A unified, multi-role digital health platform for rural communities connecting patients, doctors, lab technicians, pharmacies, and facility administrators with shared records, AI triage, teleconsultations, and referral tracking.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
